@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
-<title>lottery</title>
-        <meta charset="UTF-8">
-        <meta name="description" content="web class">
-        <meta name="author" content="ShaniDagan">
-
+    <head>
         <style>
 
             body {
                 background-color: bisque;
                 color: #13125e;
+                
             }
             script {
                 color: #183030;
@@ -17,19 +14,20 @@
             canvas {
                 border:1px solid #183030;
                 background-color: #dac4c4;
-                position: relative;
-                left: 1%;
-                top: 10%;
-                bottom: 50%;
-    
+                position: absolute;
+                left: 50px;
+                top: 150px;
+             
             }
+            
             table { 
             text-align: center; 
-
             background-color: #aaedf1;
-  	    top: 20%;
+            position: absolute;
+            right: 10%;
             border: 3px solid #13125e;
-            padding: 0px;
+            padding: 10px;
+                top: 220px;
 
             }
             th, td {
@@ -38,47 +36,58 @@
             }
             h1 {
                 font-family: "Lucida Console", Courier, monospace;
+                position: absolute;
+                left: 50px;
             }
 
             input[name="guess"] {
                
                 width: 30px;
-
             }
             input[name="send"] {
                 
-                position: relative;
-                width: max-content;
-                left: 5%;
-                top: 9%;
+                position: absolute;
+                left: 320px;
+                right: 150px;
+                
                 border: none ;
+                width: max-content;
                
            }
 
 
             form[name="play"] {
                 width: 30px;
-                position: fixed;
-                left: 21%;
-               
-                top: 35%;
+                position: absolute;
+                left: 300px;
+                right: 10px;
+                top: 300px;
                 border: none ;
-            }
-            input[name="newgame"] {
-               
-    		position: relative;
-                left: 20%;
-                top: 10%;
-            
             }
 
             img  {
                 width: 200px;
-                position: fixed;
-                left: 45%;
-                top: 22%;
+                position: absolute;
+                left: 600px;
+                right: 10px;
+                top: 160px;
             }
-
+            form[name="newgame"] {
+                width: 100px;
+                position: absolute;
+                left: 900px;
+                top:570px;
+            
+            }
+             form[name="input_boxes"] {
+  
+                
+                position: absolute;
+                top: 70px;
+                 left: 50px;
+         
+            }
+            
 
             input[type="button"] {
                 display: inline-block;
@@ -119,11 +128,10 @@
 
     </head>
     <body onload="startgame()">
-        <canvas id="thecanvas"></canvas>
-        
-	<h1>lottery</h1>
-          <form>
-            <label for="guess">Enter 7 numbers (1-40):</label><br>        
+        <canvas id="thecanvas" width="1100" height="500"></canvas>
+        <h1>lottery</h1>
+          <form name="input_boxes">
+            <label for="guess" style="font-size: 20px;">Enter 7 numbers (1-40):</label><br>        
             <input type="number" id="guess1" name="guess" >
             <input type="number" id="guess2" name="guess" >
             <input type="number" id="guess3" name="guess" >
@@ -134,20 +142,20 @@
         
     
             <input type="button" id="send" name="send" onclick="subm()"  value="SEND" >
-    
-
-           <input type="button" name="newgame" onClick="window.location.reload();"  value="NEW GAME" > 
-          </form>
+        </form>
+            
 
            <form name="play">
             <input id="play" type="button" onclick="randoms()" style="visibility:hidden" value="start the machine"  >
            </form>
 
+           <form name="newgame">
+           <input type="button"  onClick="window.location.reload();" value="NEW GAME" > 
+          </form>
 
-
-           <table id=table style="float:right">
+           <table id=table>
             <tr>
-              <th>number of correct </br> gusses</th>
+              <th>number of correct gusses</th>
               <th>prize</th> 
 
              </tr>
@@ -191,8 +199,7 @@
           <script>
                     const canvas = document.getElementById("thecanvas");
                     const cont=canvas.getContext('2d');
-                    canvas.height = window.innerHeight * 0.75;
-		    canvas.width = window.innerWidth * 0.8;
+                  
                     
             var g = [];
             function subm() {
@@ -207,7 +214,7 @@
                 g[6]=document.getElementById("guess7").value;
                 
                 var text="Your guess: ";
-                    cont.font = '25px Arial';
+                    cont.font = '28px Arial';
                     cont.fillStyle = '0,0,0';
                     var x = 50;
                     var y = 50;
@@ -279,15 +286,15 @@
                       for (var i=1;i<8;i++){
                         (function (i){
                          let newr = ball_arr[i-1].num;
-                         let x=-85+(i*150); 
+                         let x=-65+(i*150); 
                           setTimeout(function(){
 
                             ball_arr[i-1].paint=newball(ball_arr[i-1].color,ball_arr[i-1].x);
 
-                             cont.font='bold 33px Arial';
+                             cont.font='bold 25px Arial';
                              
                              cont.fillStyle = "black";
-                             cont.fillText(newr, x+20, 310);
+                             cont.fillText(newr, x, 310);
 
                           },1000*(i+1)); 
                     })(i)
@@ -337,7 +344,7 @@
                                
                 
 
-                 window.setTimeout(function last_text() { cont.fillText("Your result: "+sfira+" guesses! And your prize is: "+ prize ,canvas.width*0.1, canvas.height*0.95)},9000);
+                 window.setTimeout(function last_text() { cont.fillText("Your result: "+sfira+" guesses! And your prize is: "+ prize ,85, 450)},9000);
                 
                 } 
                
